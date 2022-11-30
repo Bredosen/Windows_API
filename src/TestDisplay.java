@@ -1,5 +1,6 @@
 import me.window.api.WindowDisplay;
 import me.window.api.exceptions.InitializedException;
+import me.window.api.types.GraphicsRenderType;
 import me.window.api.types.WindowDisplayType;
 
 public class TestDisplay extends WindowDisplay {
@@ -8,7 +9,7 @@ public class TestDisplay extends WindowDisplay {
     }
 
     public static void main(String[] args) {
-        new TestDisplay(WindowDisplayType.Static);
+        new TestDisplay(WindowDisplayType.Dynamic);
     }
 
     @Override
@@ -18,12 +19,21 @@ public class TestDisplay extends WindowDisplay {
         displayProperties().setBorder(true);
         displayProperties().setResizeable(false);
         displayProperties().setCenterDisplay(true);
+        displayProperties().setManageShutdownManuel(false);
 
+        graphicsProperties().setGraphicsRenderType(GraphicsRenderType.Direct);
+        graphicsProperties().setRenderRatio(1.0D);
 
-        sceneManager().addScene(null);
+        sceneManager().addScene(new TestScene("MainScene"));
         sceneManager().setActiveScene("MainScene");
 
         initialize();
+
+        show();
+
+        while (shouldRepaint()) repaint();
+
+        System.out.println("YEAH!");
     }
 
 

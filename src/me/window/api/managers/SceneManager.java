@@ -17,6 +17,7 @@ public final class SceneManager {
     }
 
     public boolean addScene(final Scene scene) {
+        scene.inject(windowDisplay());
         return sceneMatrix.add(scene);
     }
 
@@ -33,6 +34,7 @@ public final class SceneManager {
     public void setActiveScene(final String sceneName) {
         final Scene scene = getScene(sceneName);
         if (scene != null) setActiveScene(scene);
+        if (windowDisplay().initialized()) scene.reset();
     }
 
     public void setActiveScene(final Scene scene) {
@@ -55,5 +57,9 @@ public final class SceneManager {
      */
     public HashSet<Scene> sceneMatrix() {
         return this.sceneMatrix;
+    }
+
+    public WindowDisplay windowDisplay() {
+        return this.windowDisplay;
     }
 }

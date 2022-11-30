@@ -20,11 +20,13 @@ public class DisplayProperties {
     private Cursor  cursor; // Display cursor.
     private boolean resizeable; // Display resizeable mode.
     private boolean focusable; // Display focusable mode.
+    private float   opacity; // Display opacity.
+    private boolean manageShutdownManuel; // Control display shutdown manuel.
 
     /**
      * Setting up DisplayProperties, with default values for the variables.
      *
-     * @param windowDisplay
+     * @param displayManager
      */
     public DisplayProperties(final DisplayManager displayManager) {
         this.displayManager = displayManager;
@@ -40,6 +42,7 @@ public class DisplayProperties {
         this.cursor         = Cursor.getDefaultCursor();
         this.resizeable     = false;
         this.focusable      = true;
+        this.opacity        = 1.0f;
     }
 
     /**
@@ -308,5 +311,41 @@ public class DisplayProperties {
     public final void setDisplayLocation(final double displayX, final double displayY) throws InitializedException {
         setDisplayX(displayX);
         setDisplayY(displayY);
+    }
+
+    /**
+     * Returns the display opacity.
+     *
+     * @return opacity
+     */
+    public final float getOpacity() {
+        return this.opacity;
+    }
+
+    /**
+     * Sets the opacity of the display.
+     *
+     * @param opacity
+     */
+    public final void setOpacity(final float opacity) {
+        this.opacity = opacity;
+    }
+
+    /**
+     * Returns if display shutdown is manuel managed.
+     *
+     * @return manageShutdownManuel
+     */
+    public final boolean isManageShutdownManuel() {
+        return this.manageShutdownManuel;
+    }
+
+    /**
+     * Sets if display shutdown is managed manuel.
+     *
+     * @param manageShutdownManuel
+     */
+    public final void setManageShutdownManuel(final boolean manageShutdownManuel) {
+        this.manageShutdownManuel = manageShutdownManuel;
     }
 }
